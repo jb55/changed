@@ -35,7 +35,7 @@ module.exports = function(toCheck, opts, done) {
 
       // remove missing files?
       checkedFiles.forEach(function(checkedFile){
-        files[checkedFile.file] = checkedFile;
+        files[checkedFile.file] = checkedFile.mtime;
       });
 
       writeStorage(store, files, function(err){
@@ -60,7 +60,7 @@ function writeStorage(storeFile, files, done) {
   var wstream = fs.createWriteStream(storeFile);
   for (var key in files) {
     var file = files[key];
-    wstream.write(key + "\t" + file.mtime + "\n");
+    wstream.write(key + "\t" + file + "\n");
   }
   wstream.end();
   wstream.on('finish', done);
