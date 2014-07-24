@@ -11,6 +11,9 @@
   "scripts": {
     "test": "mocha --reporter spec"
   },
+  "bin": {
+    "changed": "./bin/changed.js"
+  },
   "dependencies": {
     "async": "^0.9.0",
     "debug": "^1.0.4",
