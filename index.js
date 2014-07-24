@@ -37,7 +37,6 @@ module.exports = function(toCheck, opts, done) {
         return !nameInFiles || cached !== checked;
       });
 
-
       // remove missing files?
       checkedFiles.forEach(function(checkedFile){
         files[checkedFile.file] = checkedFile.mtime;
