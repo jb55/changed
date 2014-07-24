@@ -24,6 +24,10 @@ module.exports = function(toCheck, opts, done) {
   readStorage(store, function(err, files){
     async.map(toCheck, statFile, function(err, checkedFiles){
       if (err) return done(err);
+
+      // remove errored/missing
+      checkedFiles = checkedFiles.filter(function(file) { return !file.err; });
+
       var changed = checkedFiles.filter(function(checkedFile){
         var name = checkedFile.file;
         var nameInFiles = name in files;
@@ -32,6 +36,7 @@ module.exports = function(toCheck, opts, done) {
         debug("mtimes %s cached(%j) checked(%s)", name, cached, checked);
         return !nameInFiles || cached !== checked;
       });
+
 
       // remove missing files?
       checkedFiles.forEach(function(checkedFile){
@@ -48,11 +53,17 @@ module.exports = function(toCheck, opts, done) {
 
 function statFile(file, done) {
   fs.stat(file, function(err, stats){
-    if (err) return done(err);
-    return done(err, {
-      file: file,
-      mtime: stats.mtime.getTime()
-    });
+    if (err) {
+      return done(null, {
+        file: file,
+        err: err
+      });
+    } else {
+      return done(err, {
+        file: file,
+        mtime: stats.mtime.getTime()
+      });
+    }
   });
 }
 
