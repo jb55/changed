@@ -1,5 +1,5 @@
 {
-  "name": "mtimes-changed",
+  "name": "changed",
   "description": "Utility that filters arguments if they haven't changed",
   "keywords": [],
   "version": "0.0.1",
