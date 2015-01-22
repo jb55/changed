@@ -1,5 +1,5 @@
 
-# changed
+# mtimes-changed
 
   Filters a list of files based on if they have changed or not
 
@@ -7,7 +7,7 @@
 
   Install with npm
 
-    $ npm -g install jb55/changed
+    $ npm -g install mtimes-changed
 
 ## Command-line usage
 
@@ -16,7 +16,7 @@
 ## API Example
 
 ```js
-var changed = require('changed')
+var changed = require('mtimes-changed')
 changed(["some.txt", "files.txt"], function(err, files){
   // files === changed files
 })
