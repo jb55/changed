@@ -14,7 +14,16 @@ if (argv._.length === 0)
 var store = argv.s || "/tmp/changed.store";
 
 changed(argv._, { store: store }, function(err, files){
+  if (err) {
+    console.error(err);
+    process.exit(1);
+  }
+
   files.forEach(function(file){
     console.log(file);
   });
+
+  if (files.length === 0) process.exit(2);
+
+  process.exit(0);
 });
